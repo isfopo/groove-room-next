@@ -1,5 +1,6 @@
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
+// to update, run ``
 
 datasource db {
   provider = "postgresql"
@@ -8,4 +9,33 @@ datasource db {
 
 generator client {
   provider = "prisma-client-js"
+}
+
+model User {
+  id            String    @id @default(uuid())
+  name          String    @unique
+  avatar        String    @unique
+  createdAt     DateTime  @default(now()) @map(name: "created_at")
+  updatedAt     DateTime  @updatedAt @map(name: "updated_at")
+  messages      Message[]
+  @@map(name: "users")
+}
+
+model Room {
+  id            String    @id @default(uuid())
+  name          String    @unique
+  createdAt     DateTime  @default(now()) @map(name: "created_at")
+  updatedAt     DateTime  @updatedAt @map(name: "updated_at")
+  messages      Message[]
+}
+
+model Message {
+  id            String       @id @default(uuid())
+  content       String
+  createdAt     DateTime  @default(now()) @map(name: "created_at")
+  updatedAt     DateTime  @updatedAt @map(name: "updated_at")
+  author        User @relation(fields: [authorId], references: [id])
+  authorId      String
+  room          Room @relation(fields: [roomId], references: [id])
+  roomId        String
 }
