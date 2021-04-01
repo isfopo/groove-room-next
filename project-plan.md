@@ -4,7 +4,7 @@
 
 ### Setup
 
-- [ ] create next project and repository
+- [x] create next project and repository
 - [ ] load design files
 - [ ] download dependencies from npm
 - [ ] setup prisma
@@ -31,3 +31,7 @@
 - [ ] setup prisma on next
   - [ ] create models and associations
 - [ ] use NextAuth to setup a user and get authorization token from spotify
+
+## Resources
+
+- [How to Build a Fullstack App with Next.js, Prisma, and PostgreSQL](https://vercel.com/guides/nextjs-prisma-postgres)
