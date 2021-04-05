@@ -5,6 +5,7 @@ import { LeftSidebar } from "./leftSidebar";
 export const Home = (props) => {
   const { session } = props;
   const [user, setUser] = useState({});
+  const [room, setRoom] = useState({});
 
   useEffect(async () => {
     const res = await fetch("http://localhost:3000/api/user", {
@@ -22,6 +23,8 @@ export const Home = (props) => {
   }, []);
 
   const handleSetRoom = (room) => {
+    // TODO: make api call to get room with users and messages
+
     setRoom(room);
   };
 
