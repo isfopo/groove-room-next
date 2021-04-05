@@ -2,7 +2,7 @@ import Head from "next/head";
 import styles from "../styles/App.module.css";
 import { signIn, signOut, useSession } from "next-auth/client";
 
-import { Home } from "./home";
+import { Home } from "../components/home";
 
 export default function App() {
   const [session] = useSession();
@@ -28,7 +28,13 @@ export default function App() {
         )}
       </main>
 
-      <footer className={styles.footer}></footer>
+      <footer className={styles.footer}>
+        {session && (
+          <>
+            <button onClick={signOut}>Sign Out</button>
+          </>
+        )}
+      </footer>
     </div>
   );
 }
