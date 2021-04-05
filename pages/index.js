@@ -24,6 +24,7 @@ export default function App() {
             {" "}
             {console.log(session)}
             <h1>You are signed in as {session.user.email}</h1>
+            <img src={session.user.image} />
             <button onClick={signOut}>Sign Out</button>
           </>
         )}
