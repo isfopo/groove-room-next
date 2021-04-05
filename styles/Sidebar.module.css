@@ -1,0 +1,57 @@
+/* TODO: handle should underneath panel */
+
+.handleLeft {
+  position: fixed;
+  top: 5%;
+  min-width: 5vh;
+  width: 5%;
+  height: auto;
+  z-index: -1;
+  left: 5%;
+}
+
+.sidebarLeft {
+  background-color: rgb(187, 187, 187);
+  width: 30%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: -30%;
+  z-index: 1;
+  transition: left 0.5s ease;
+}
+
+.sidebarLeft:hover {
+  left: 0;
+}
+
+.right {
+  right: -30%;
+  transition: right 0.5s ease;
+}
+
+.right:hover {
+  right: 0;
+}
+
+.handle-right {
+  right: 5%;
+}
+
+.list {
+  overflow: scroll;
+  height: 95%;
+}
+
+.list p {
+  padding: 2% 5%;
+}
+
+.active {
+  background-color: deepskyblue;
+}
+
+.playlist-display {
+  overflow: scroll;
+  height: 500px;
+}
