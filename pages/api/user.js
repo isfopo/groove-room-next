@@ -14,12 +14,12 @@ export default async (req, res) => {
       user = await prisma.user.create({
         data: {
           name: req.body.name,
+          email: req.body.email,
           avatar: req.body.picture,
         },
       });
     }
 
-    console.log(user);
     res.status(200).json(user);
   }
 };
