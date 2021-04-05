@@ -2,8 +2,10 @@ import Head from "next/head";
 import styles from "../styles/App.module.css";
 import { signIn, signOut, useSession } from "next-auth/client";
 
+import { Home } from "./home";
+
 export default function App() {
-  const [session, loading] = useSession();
+  const [session] = useSession();
 
   return (
     <div className={styles.container}>
@@ -21,11 +23,7 @@ export default function App() {
 
         {session && (
           <>
-            {" "}
-            {console.log(session)}
-            <h1>You are signed in as {session.user.email}</h1>
-            <img src={session.user.image} />
-            <button onClick={signOut}>Sign Out</button>
+            <Home session={session} />
           </>
         )}
       </main>
