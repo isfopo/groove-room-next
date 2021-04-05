@@ -22,18 +22,24 @@ export const Home = (props) => {
     setUser(json);
   }, []);
 
-  const handleSetRoom = (room) => {
-    // TODO: make api call to get room with users and messages
+  const handleSetRoom = async (newRoom) => {
+    const res = await fetch(`http://localhost:3000/api/room/${newRoom.id}`);
+    const json = await res.json();
 
-    setRoom(room);
+    setRoom(json);
   };
 
   return (
     <div>
       <LeftSidebar rooms={user.rooms} handleSetRoom={handleSetRoom} />
-      <h1>{user.name}</h1>
-      <p>{user.email}</p>
-      <img src={user.avatar} />
+      {room && // TODO: make this a component for user display
+        room.users.map((user, key) => (
+          <div key={key}>
+            <h1>{user.name}</h1>
+            <p>{user.email}</p>
+            <img src={user.avatar} />
+          </div>
+        ))}
     </div>
   );
 };
