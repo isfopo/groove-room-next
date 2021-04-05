@@ -17,13 +17,17 @@ export const Home = (props) => {
       }),
     });
     const json = await res.json();
-    console.log(json);
+
     setUser(json);
   }, []);
 
+  const handleSetRoom = (room) => {
+    setRoom(room);
+  };
+
   return (
     <div>
-      <LeftSidebar rooms={user.rooms} />
+      <LeftSidebar rooms={user.rooms} handleSetRoom={handleSetRoom} />
       <h1>{user.name}</h1>
       <p>{user.email}</p>
       <img src={user.avatar} />
