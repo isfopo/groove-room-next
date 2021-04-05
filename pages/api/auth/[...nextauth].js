@@ -6,6 +6,9 @@ const options = {
     Providers.Spotify({
       clientId: process.env.SPOTIFY_CLIENT_ID,
       clientSecret: process.env.SPOTIFY_CLIENT_SECRET,
+      scope:
+        "user-read-recently-played streaming user-read-private user-read-email user-read-playback-position user-read-playback-state user-modify-playback-state",
+      response_type: "token",
       profile(profile) {
         return {
           id: profile.id,
@@ -16,6 +19,19 @@ const options = {
       },
     }),
   ],
+  callbacks: {
+    async jwt(token, _, account) {
+      if (account) {
+        token.id = account.id;
+        token.accessToken = account.accessToken;
+      }
+      return token;
+    },
+    async session(session, user) {
+      session.user = user;
+      return session;
+    },
+  },
 };
 
 export default (req, res) => NextAuth(req, res, options);
