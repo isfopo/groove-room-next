@@ -8,6 +8,7 @@ export default async (req, res) => {
 
     let user = await prisma.user.findUnique({
       where: { name: req.body.name },
+      include: { rooms: true },
     });
 
     if (user == null) {
@@ -17,6 +18,7 @@ export default async (req, res) => {
           email: req.body.email,
           avatar: req.body.picture,
         },
+        include: { rooms: true },
       });
     }
 
