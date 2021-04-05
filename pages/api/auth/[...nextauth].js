@@ -9,14 +9,6 @@ const options = {
       scope:
         "user-read-recently-played streaming user-read-private user-read-email user-read-playback-position user-read-playback-state user-modify-playback-state",
       response_type: "token",
-      profile(profile) {
-        return {
-          id: profile.id,
-          name: profile.display_name,
-          email: profile.email,
-          image: profile.images?.[0]?.url,
-        };
-      },
     }),
   ],
   callbacks: {
