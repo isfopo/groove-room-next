@@ -18,6 +18,7 @@
 
 - [ ] api will need to be converted from express req and res objects to next req and res objects
 - [ ] sequelize to prisma connections from SQLite to PostgreSQL
+- [ ] Pages and components should be converted to next and rethought
 
 ### Improve
 
