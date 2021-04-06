@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import Image from "next/image";
 
 export const User = (props) => {
   const { user, room } = props;
@@ -10,11 +11,15 @@ export const User = (props) => {
     );
     setMessages(await res.json());
   }, [room]);
-  // TODO: if avatar is null, show default avatar
+
   return (
     <div>
       <h1>{user.name}</h1>
-      <img src={user.avatar} />
+      <Image
+        src={user.avatar ? user.avatar : "/images/default-profile.png"}
+        width={500}
+        height={500}
+      />
       {messages?.map((message, key) => (
         <p key={key}>{message.content}</p>
       ))}

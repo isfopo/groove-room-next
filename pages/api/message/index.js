@@ -19,7 +19,6 @@ export default async (req, res) => {
       },
     });
 
-    console.log(user, room, messages);
     res.status(200).json(messages);
   }
 };
