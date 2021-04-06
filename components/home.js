@@ -5,7 +5,7 @@ import { User } from "./user";
 
 export const Home = (props) => {
   const { session } = props;
-  const [user, setUser] = useState({});
+  const [currentUser, setCurrentUser] = useState({});
   const [room, setRoom] = useState({});
 
   useEffect(async () => {
@@ -19,7 +19,7 @@ export const Home = (props) => {
       }),
     });
 
-    setUser(await res.json());
+    setCurrentUser(await res.json());
   }, []);
 
   const handleSetRoom = async (newRoom) => {
@@ -29,10 +29,10 @@ export const Home = (props) => {
 
   return (
     <div>
-      <LeftSidebar rooms={user.rooms} handleSetRoom={handleSetRoom} />
+      <LeftSidebar rooms={currentUser.rooms} handleSetRoom={handleSetRoom} />
 
       {room.users?.map((user, key) => (
-        <User user={user} room={room} key={key} />
+        <User user={user} room={room} currentUser={currentUser} key={key} />
       ))}
     </div>
   );
