@@ -1,9 +1,9 @@
 import React from "react";
 import styles from "../styles/Sidebar.module.css";
 
-import Add from "../public/icons/Add";
-import Join from "../public/icons/Group";
-import List from "../public/icons/List";
+import Add from "../icons/Add";
+import Join from "../icons/Group";
+import List from "../icons/List";
 
 export const LeftSidebar = (props) => {
   const { rooms, handleSetRoom } = props;

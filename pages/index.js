@@ -4,6 +4,8 @@ import { signIn, signOut, useSession } from "next-auth/client";
 
 import { Home } from "../components/home";
 
+import Logout from "../icons/Logout";
+
 export default function App() {
   const [session] = useSession();
 
@@ -31,7 +33,7 @@ export default function App() {
       <footer className={styles.footer}>
         {session && (
           <>
-            <button onClick={signOut}>Sign Out</button>
+            <Logout />
           </>
         )}
       </footer>
