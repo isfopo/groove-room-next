@@ -17,6 +17,9 @@ export default async (req, res) => {
           },
         },
       },
+      orderBy: {
+        createdAt: "asc",
+      },
     });
 
     res.status(200).json(messages);
