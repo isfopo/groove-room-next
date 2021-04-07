@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 
 export const User = (props) => {
-  const { user, room, currentUser } = props;
+  const { user, room, canType } = props;
   const [messages, setMessages] = useState();
   const [readyToType, setReadyToType] = useState(false);
   const [newMessage, setNewMessage] = useState("");
@@ -22,8 +22,6 @@ export const User = (props) => {
       },
       method: "POST",
       body: JSON.stringify({
-        user: user.id,
-        currentUser: currentUser.id,
         room: room.id,
         content: newMessage,
       }),
@@ -45,7 +43,7 @@ export const User = (props) => {
         height={500}
       />
       <div>
-        {user.id === currentUser.id && readyToType ? (
+        {canType && readyToType ? (
           <form onSubmit={handleSubmit}>
             <input
               className="input"
