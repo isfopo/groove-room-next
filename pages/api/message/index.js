@@ -47,8 +47,17 @@ export default async (req, res) => {
     const {
       body: { room, content },
     } = req;
-    // TODO: also verify if user in in room
-    if (user) {
+
+    const { users } = await prisma.room.findUnique({
+      where: {
+        id: room,
+      },
+      include: {
+        users: true,
+      },
+    });
+
+    if (users.map((user) => user.id).includes(user.id)) {
       const message = await prisma.message.create({
         data: {
           content,
