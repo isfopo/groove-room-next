@@ -32,7 +32,12 @@ export const Home = (props) => {
       <LeftSidebar rooms={currentUser.rooms} handleSetRoom={handleSetRoom} />
 
       {room.users?.map((user, key) => (
-        <User user={user} room={room} currentUser={currentUser} key={key} />
+        <User
+          user={user}
+          room={room}
+          canType={user.id == currentUser?.id}
+          key={key}
+        />
       ))}
     </div>
   );
