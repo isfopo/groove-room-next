@@ -1,4 +1,6 @@
 import prisma from "../../../prisma/client";
+import { getSession } from "next-auth/client";
+const SpotifyWebApi = require("spotify-web-api-node");
 
 export default async (req, res) => {
   if (req.method === "GET") {
@@ -26,23 +28,39 @@ export default async (req, res) => {
   }
 
   if (req.method === "POST") {
-    const {
-      body: { user, currentUser, room, content },
-    } = req;
+    const spotifyWebApi = new SpotifyWebApi();
 
-    if (user === currentUser) {
+    const session = await getSession({ req });
+
+    const {
+      user: { accessToken },
+    } = session;
+    spotifyWebApi.setAccessToken(accessToken);
+    const me = await spotifyWebApi.getMe();
+
+    const user = await prisma.user.findUnique({
+      where: {
+        name: me.body.display_name,
+      },
+    });
+
+    const {
+      body: { room, content },
+    } = req;
+    // TODO: also verify if user in in room
+    if (user) {
       const message = await prisma.message.create({
         data: {
           content,
           author: {
-            connect: { id: user },
+            connect: { id: user.id },
           },
           room: {
             connect: { id: room },
           },
         },
       });
-      console.log(message);
+
       res.status(200).json(message);
     } else {
       res.sendStatus(400);
