@@ -33,7 +33,7 @@ export default function App() {
       <footer className={styles.footer}>
         {session && (
           <>
-            <Logout />
+            <Logout onClick={signOut} />
           </>
         )}
       </footer>
