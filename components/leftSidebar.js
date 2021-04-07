@@ -1,14 +1,20 @@
 import React from "react";
 import styles from "../styles/Sidebar.module.css";
 
+import { RoomLineItem } from "./roomLineItem";
+
 import Add from "../icons/Add";
 import Join from "../icons/Group";
 import List from "../icons/List";
 
 export const LeftSidebar = (props) => {
-  const { rooms, handleSetRoom } = props;
+  const { rooms, currentRoom, handleSetCurrentRoom } = props;
 
-  const handleClick = () => {
+  const handleAdd = () => {
+    console.log("add");
+  };
+
+  const handleJoin = () => {
     console.log("click");
   };
 
@@ -18,14 +24,17 @@ export const LeftSidebar = (props) => {
         {rooms &&
           rooms.map((room, key) => {
             return (
-              <p key={key} onClick={() => handleSetRoom(room)}>
-                {room.name}
-              </p>
+              <RoomLineItem
+                key={key}
+                room={room}
+                active={room.id === currentRoom.id}
+                handleSetCurrentRoom={handleSetCurrentRoom}
+              />
             );
           })}
       </div>
-      <Add onClick={() => handleClick()} />
-      <Join onClick={() => handleClick()} />
+      <Add onClick={() => handleAdd()} />
+      <Join onClick={() => handleJoin()} />
       <List className={styles.handleLeft} />
     </div>
   );

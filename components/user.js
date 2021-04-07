@@ -2,17 +2,17 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 
 export const User = (props) => {
-  const { user, room, canType } = props;
+  const { user, currentRoom, canType } = props;
   const [messages, setMessages] = useState();
   const [readyToType, setReadyToType] = useState(false);
   const [newMessage, setNewMessage] = useState("");
 
   useEffect(async () => {
     const res = await fetch(
-      `http://localhost:3000/api/message?user=${user.id}&room=${room.id}`
+      `http://localhost:3000/api/message?user=${user.id}&room=${currentRoom.id}`
     );
     setMessages(await res.json());
-  }, [room]);
+  }, [currentRoom]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -22,7 +22,7 @@ export const User = (props) => {
       },
       method: "POST",
       body: JSON.stringify({
-        room: room.id,
+        room: currentRoom.id,
         content: newMessage,
       }),
     });
